@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import axios from 'axios';
 
 // Export the POST handler
-export async function POST(request: Request) {
+export async function POST() {
   try {
     // Get access token
     const tokenResponse = await axios.post(
@@ -21,9 +21,9 @@ export async function POST(request: Request) {
       }
     );
 
-    console.log("Token Response:", tokenResponse.data); // Debug log
+    console.log("Token Response:", tokenResponse.data);
 
-    const accessToken = tokenResponse.data.access_token;
+    const accessToken: string = tokenResponse.data.access_token;
 
     // Create Zoom meeting
     const zoomResponse = await axios.post(
@@ -47,17 +47,29 @@ export async function POST(request: Request) {
       }
     );
 
-    console.log("Zoom Response:", zoomResponse.data); // Debug log
+    console.log("Zoom Response:", zoomResponse.data);
 
     return NextResponse.json({
       join_url: zoomResponse.data.join_url,
       meeting_id: zoomResponse.data.id,
       password: zoomResponse.data.password,
     });
-  } catch (error: any) {
-    console.error('Zoom API Error:', error.response?.data || error.message);
+
+  } catch (error) {
+    let errorMessage = 'An unknown error occurred';
+    let errorDetails = '';
+
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || 'Error in Zoom API response';
+      errorDetails = JSON.stringify(error.response.data);
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    console.error('Zoom API Error:', errorDetails || errorMessage);
+
     return NextResponse.json(
-      { error: "Failed to create Zoom meeting", details: error.message },
+      { error: "Failed to create Zoom meeting", details: errorMessage },
       { status: 500 }
     );
   }

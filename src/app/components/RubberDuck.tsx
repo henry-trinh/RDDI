@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface RubberDuckProps {
   size?: 'sm' | 'md' | 'lg';
@@ -9,13 +10,13 @@ interface RubberDuckProps {
 }
 
 const RubberDuck = ({ size = 'md', animated = false, onClick }: RubberDuckProps) => {
-  const [isFloating, setIsFloating] = useState(animated);
+  const [isFloating, setIsFloating] = useState<boolean>(animated);
 
   useEffect(() => {
     setIsFloating(animated);
   }, [animated]);
 
-  const sizeClasses = {
+  const sizeClasses: Record<string, string> = {
     sm: 'w-16 h-16',
     md: 'w-32 h-32',
     lg: 'w-80 h-80',
@@ -27,13 +28,16 @@ const RubberDuck = ({ size = 'md', animated = false, onClick }: RubberDuckProps)
       style={{
         zIndex: 20,  // Ensure the duck is above the water
         position: 'absolute',
-        bottom: '-290px',  // Adjust to desired height
+        bottom: '-290px',
       }}
       onClick={onClick}
     >
-      <img 
+      <Image 
         src="/rubber-ducky.gif" 
         alt="Rubber Duck" 
+        width={128} 
+        height={128} 
+        priority 
         className={`${isFloating ? 'animate-bounce' : ''}`}
       />
     </div>

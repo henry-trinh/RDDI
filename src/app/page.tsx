@@ -34,7 +34,7 @@ const Home = () => {
           </h1>
           <div className="bg-white p-6 rounded-lg shadow-md mb-6 border border-border">
             <p className="text-xl italic mb-4">
-              "If you can explain it to a duck, you can explain it to anyone."
+              &quot;If you can explain it to a duck, you can explain it to anyone.&quot;
             </p>
             <p className="text-muted-foreground">
               Simplify your problems by explaining them to a virtual duck.

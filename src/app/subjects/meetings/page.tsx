@@ -159,7 +159,7 @@ export default function SubjectsPage() {
                     {/* Card 4 */}
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                         <Image 
-                            src="/pond-image.jpg" 
+                            src="/LanguageDuck.PNG" 
                             alt="Literature Review Techniques" 
                             width={300} 
                             height={200} 

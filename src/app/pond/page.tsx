@@ -88,7 +88,7 @@ export default function SubjectsPage() {
                     {/* Notional Card 4 */}
                     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                         <Image 
-                            src="/LanguageDuck.png" 
+                            src="/LanguageDuck.PNG" 
                             alt="Literature Review Techniques" 
                             width={300} 
                             height={200} 
